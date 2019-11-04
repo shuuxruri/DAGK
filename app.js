@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
+var aboutRouter = require('./routes/about-us');
+var userRouter = require('./routes/user')
 var app = express();
 
 // view engine setup
@@ -24,8 +24,26 @@ app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/user',userRouter);
+app.use('/about-us', aboutRouter);
+app.get('/howitwork',function(req, res, next){
+res.render('howitwork');
+});
+app.get('/pricing',function(req, res, next){
+  res.render('pricing');
+});
+app.get('/comming-soon',function(req, res, next){
+    res.render('comming-soon');
+});
+app.get('/profile',function(req, res, next){
+  res.render('profile');
+});
+app.get('/productpage',function(req, res, next){
+  res.render('productpage');
+});
+app.get('/category',function(req, res, next){
+  res.render('category');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
